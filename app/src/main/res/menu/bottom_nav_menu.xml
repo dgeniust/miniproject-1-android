@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/nav_dial"
+        android:icon="@drawable/ic_call"
+        android:title="Dial"
+        app:showAsAction="ifRoom"
+        android:contentDescription="Make a phone call" />
+
+    <item
+        android:id="@+id/nav_sms"
+        android:icon="@drawable/ic_message"
+        android:title="SMS"
+        app:showAsAction="ifRoom"
+        android:contentDescription="Send a text message" />
+
+    <item
+        android:id="@+id/nav_contacts"
+        android:icon="@drawable/ic_contacts"
+        android:title="Contacts"
+        app:showAsAction="ifRoom"
+        android:contentDescription="View contacts" />
+
+    <item
+        android:id="@+id/nav_history"
+        android:icon="@drawable/ic_history"
+        android:title="Call History"
+        app:showAsAction="never"
+        android:contentDescription="View call history" />
+
+    <item
+        android:id="@+id/nav_settings"
+        android:icon="@drawable/ic_settings"
+        android:title="Settings"
+        app:showAsAction="never"
+        android:contentDescription="Open settings" />
+</menu>

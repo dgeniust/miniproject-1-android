@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/white">
+
+    <!-- Toolbar with improved styling -->
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:background="@color/bg"
+        android:elevation="4dp"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        app:title="Lịch"
+        app:titleTextAppearance="@style/TextAppearance.AppCompat.Widget.ActionBar.Title"
+        app:titleTextColor="@color/black">
+
+        <ImageView
+            android:id="@+id/btn_add_event"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_gravity="end"
+            android:layout_marginEnd="16dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="Add event"
+            android:padding="12dp"
+            android:src="@android:drawable/ic_menu_add"
+            app:tint="@color/Toolbar" />
+    </androidx.appcompat.widget.Toolbar>
+
+    <!-- Calendar with improved card styling -->
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        app:cardCornerRadius="16dp"
+        app:cardElevation="4dp">
+
+        <CalendarView
+            android:id="@+id/calendar_View"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="8dp"
+            android:firstDayOfWeek="2"
+            android:showWeekNumber="false"
+            android:dateTextAppearance="@style/TextAppearance.AppCompat.Medium" />
+    </androidx.cardview.widget.CardView>
+
+    <!-- Events section with header -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="8dp"
+        android:text="Sự kiện trong ngày"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+    <!-- ListView with improved styling -->
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        app:cardCornerRadius="16dp"
+        app:cardElevation="2dp">
+
+        <ListView
+            android:id="@+id/ListView_Event"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/white"
+            android:divider="@null"
+            android:dividerHeight="8dp"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp"
+            android:clipToPadding="false"
+            android:scrollbarStyle="outsideOverlay" />
+    </androidx.cardview.widget.CardView>
+
+    <!-- Bottom Navigation with improved styling -->
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/nav_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="78dp"
+        android:background="@color/bg"
+        android:elevation="8dp"
+        app:itemBackground="@color/bg"
+        app:itemIconSize="28dp"
+        app:itemIconTint="@color/Toolbar"
+        app:itemTextColor="@color/bg"
+        app:labelVisibilityMode="unlabeled"
+        app:itemRippleColor="@color/bg"
+        app:menu="@menu/bottom_nav_menu_calendar" />
+</LinearLayout>
