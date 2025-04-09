@@ -99,9 +99,8 @@ public class CallsActivity extends AppCompatActivity {
                     Context.RECEIVER_NOT_EXPORTED);
         }
 
-        callStateManager.startListening();
-
         if (hasRequiredPermissions()) {
+            callStateManager.startListening();
             loadCallLog();
         }
     }
@@ -141,13 +140,23 @@ public class CallsActivity extends AppCompatActivity {
                                            @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if (requestCode == REQUEST_CALL_PERMISSION) {
-            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+            boolean allGranted = true;
+            for (int result : grantResults) {
+                if (result != PackageManager.PERMISSION_GRANTED) {
+                    allGranted = false;
+                    break;
+                }
+            }
+
+            if (allGranted) {
+                callStateManager.startListening();
                 loadCallLog();
             } else {
                 Toast.makeText(this, "Cần cấp quyền cuộc gọi", Toast.LENGTH_LONG).show();
             }
         }
     }
+
 
     private void loadCallLog() {
         callList.clear();

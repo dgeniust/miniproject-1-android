@@ -8,6 +8,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
@@ -59,7 +60,7 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.SongViewHolder
 
     public class SongViewHolder extends RecyclerView.ViewHolder {
 
-        private RelativeLayout layoutItemMusic;
+        private CardView layoutItemMusic;
         private ImageView imgSong;
         private TextView tvTitle;
         private TextView tvSinger;
