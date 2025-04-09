@@ -2,8 +2,30 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_MEDIA_PLAYBACK" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM" />
+    <uses-permission android:name="android.permission.USE_EXACT_ALARM" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_DATA_SYNC" />
+    <uses-permission android:name="android.permission.RECEIVE_SMS" />
+    <uses-permission android:name="android.permission.READ_SMS" />
+    <uses-permission android:name="android.permission.SEND_SMS" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+    <uses-permission android:name="android.permission.READ_CALL_LOG" />
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
+    <uses-permission android:name="android.permission.ANSWER_PHONE_CALLS" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.PROCESS_OUTGOING_CALLS" />
+    <!-- Khai báo phần cứng không bắt buộc -->
+    <uses-feature
+        android:name="android.hardware.telephony"
+        android:required="false" />
+    <uses-permission android:name="android.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS" />
+
     <application
+        android:name=".MyApplication"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -14,14 +36,91 @@
         android:theme="@style/Theme.MiniProject_1_AS_22110264_22110129"
         tools:targetApi="31">
         <activity
-            android:name=".MainActivity"
+            android:name=".activities.BatterySaverActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activities.CallsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activities.SMSActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activities.ItemSongActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activities.ListSongActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activities.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity> <!-- Service có thể chạy trong Foreground -->
+        <service
+            android:name=".services.SongService"
+            android:enabled="true"
+            android:exported="true"
+            android:foregroundServiceType="mediaPlayback" /> <!-- Broadcast Receiver nhận sự kiện BOOT_COMPLETED -->
+        <service
+            android:name=".services.SMSService"
+            android:exported="false" />
+
+        <receiver
+            android:name=".services.SMSReceiver"
+            android:exported="true"
+            android:permission="android.permission.BROADCAST_SMS">
+            <intent-filter android:priority="1000">
+                <action android:name="android.provider.Telephony.SMS_RECEIVED" />
+            </intent-filter>
+        </receiver>
+
+        <receiver
+            android:name=".services.CallReceiver"
+            android:enabled="true"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.PHONE_STATE" />
+                <action android:name="android.intent.action.NEW_OUTGOING_CALL" />
+            </intent-filter>
+        </receiver>
+        <receiver
+            android:name=".services.SongReceiver"
+            android:enabled="true"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+        </receiver>
+
+        <service
+            android:name=".services.BlacklistService"
+            android:enabled="true"
+            android:exported="false"
+            android:foregroundServiceType="dataSync"
+            tools:ignore="ForegroundServicePermission" />
+        <activity android:name=".activities.BlacklistActivity"/>
+
+
+        <activity
+            android:name=".activities.CalendarActivity"
+            android:exported="false">
         </activity>
+        <activity
+            android:name=".activities.EventCompletedActivity"
+            android:exported="false">
+        </activity>
+
+        <receiver android:name=".services.EventReminderReceiver"
+            android:exported="true"
+            android:enabled="true">
+            <intent-filter>
+                <action android:name="hcmute.edu.vn.miniproject1.EVENT_REMINDER"/>
+            </intent-filter>
+        </receiver>
+
     </application>
 
 </manifest>
