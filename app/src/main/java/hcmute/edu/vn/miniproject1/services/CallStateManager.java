@@ -27,15 +27,25 @@ public class CallStateManager {
     }
 
     public void startListening() {
-        phoneStateListener = new PhoneStateListener() {
-            @Override
-            public void onCallStateChanged(int state, String phoneNumber) {
-                handleStateChange(state, phoneNumber);
-            }
-        };
+        if (androidx.core.content.ContextCompat.checkSelfPermission(context, android.Manifest.permission.READ_PHONE_STATE)
+                != android.content.pm.PackageManager.PERMISSION_GRANTED) {
+            Log.w(TAG, "Thiếu quyền READ_PHONE_STATE. Không thể lắng nghe cuộc gọi.");
+            return;
+        }
+
+        if (phoneStateListener == null) {
+            phoneStateListener = new PhoneStateListener() {
+                @Override
+                public void onCallStateChanged(int state, String phoneNumber) {
+                    handleStateChange(state, phoneNumber);
+                }
+            };
+        }
+
         telephonyManager.listen(phoneStateListener, PhoneStateListener.LISTEN_CALL_STATE);
         Log.d(TAG, "Đã bắt đầu lắng nghe trạng thái cuộc gọi.");
     }
+
 
     public void stopListening() {
         if (phoneStateListener != null) {

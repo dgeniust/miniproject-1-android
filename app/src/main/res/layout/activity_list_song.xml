@@ -2,193 +2,101 @@
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg_list"
+    android:background="@drawable/bg_gradient_card"
     tools:context=".activities.ListSongActivity">
 
-    <!-- Toolbar/Header -->
-    <RelativeLayout
-        android:id="@+id/header_layout"
-        android:layout_width="match_parent"
-        android:layout_height="56dp"
-        android:background="#80000000">
-
-        <TextView
-            android:id="@+id/tv_playlist_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_marginStart="16dp"
-            android:text="My Playlist"
-            android:textColor="#FFFFFF"
-            android:textSize="18sp"
-            android:textStyle="bold" />
-
-        <ImageView
-            android:id="@+id/btn_search"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:layout_alignParentEnd="true"
-            android:layout_centerVertical="true"
-            android:layout_marginEnd="8dp"
-            android:padding="12dp"
-            android:src="@drawable/ic_search"
-            android:background="?attr/selectableItemBackgroundBorderless"
-            android:contentDescription="Search" />
-    </RelativeLayout>
-
-    <!-- Song List -->
+    <!-- Danh sách bài hát -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/lst_music"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/header_layout"
         android:layout_above="@id/layout_music_bar"
-        android:clipToPadding="false"
-        android:paddingTop="8dp"
-        android:paddingBottom="8dp"
-        android:paddingStart="8dp"
-        android:paddingEnd="8dp"
-        android:background="#22FFFFFF"
-        android:scrollbars="vertical"
-        android:scrollbarThumbVertical="@drawable/scrollbar_thumb"
-        android:fadeScrollbars="true"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         tools:listitem="@layout/item_music" />
-    <!-- Now Playing Bar -->
-    <androidx.cardview.widget.CardView
+
+    <!-- Thanh điều khiển nhạc -->
+    <RelativeLayout
         android:id="@+id/layout_music_bar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="93dp"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
-        app:cardBackgroundColor="#1E1E1E"
-        app:cardCornerRadius="8dp"
-        app:cardElevation="4dp"
-        android:visibility="visible">
+        android:background="@color/colorPrimaryDark"
+        android:visibility="gone">
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="72dp">
+        <!-- Ảnh bài hát -->
+        <ImageView
+            android:id="@+id/img_song"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="10dp"
+            android:scaleType="centerCrop"
+            android:src="@mipmap/ic_launcher"
+            />
 
-            <!-- Song Progress -->
-            <ProgressBar
-                android:id="@+id/progress_song"
-                style="?android:attr/progressBarStyleHorizontal"
-                android:layout_width="match_parent"
-                android:layout_height="2dp"
-                android:layout_alignParentTop="true"
-                android:progressTint="#1DB954"
-                android:progress="30" />
+        <!-- Layout chứa thông tin bài hát -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toEndOf="@id/img_song"
+            android:layout_toStartOf="@id/control_layout"
+            android:layout_marginStart="10dp"
+            android:orientation="vertical">
 
-            <!-- Album Art -->
-            <androidx.cardview.widget.CardView
-                android:id="@+id/card_album_art"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_centerVertical="true"
-                android:layout_marginStart="12dp"
-                app:cardCornerRadius="4dp"
-                app:cardElevation="0dp">
-
-                <ImageView
-                    android:id="@+id/img_song"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:scaleType="centerCrop"
-                    android:src="@drawable/album_placeholder" />
-            </androidx.cardview.widget.CardView>
-
-            <!-- Song Info -->
-            <LinearLayout
+            <TextView
+                android:id="@+id/tv_title_song"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_marginStart="12dp"
-                android:layout_toEndOf="@id/card_album_art"
-                android:layout_toStartOf="@id/control_layout"
-                android:orientation="vertical">
+                android:text="Tên bài hát"
+                android:textColor="@color/accent"
+                android:textSize="14sp"
+                android:maxLines="1"
+                android:ellipsize="end" />
 
-                <TextView
-                    android:id="@+id/tv_title_song"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:ellipsize="end"
-                    android:maxLines="1"
-                    android:text="Tên bài hát"
-                    android:textColor="#FFFFFF"
-                    android:textSize="14sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/tv_singer_song"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:ellipsize="end"
-                    android:maxLines="1"
-                    android:text="Ca sĩ"
-                    android:textColor="#B3FFFFFF"
-                    android:textSize="12sp" />
-            </LinearLayout>
-
-            <!-- Control Buttons -->
-            <LinearLayout
-                android:id="@+id/control_layout"
+            <TextView
+                android:id="@+id/tv_singer_song"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:layout_centerVertical="true"
-                android:layout_marginEnd="12dp"
-                android:orientation="horizontal">
+                android:text="Ca sĩ"
+                android:textColor="@android:color/darker_gray"
+                android:textSize="13sp"
+                android:maxLines="1"
+                android:ellipsize="end" />
+        </LinearLayout>
 
-                <ImageView
-                    android:id="@+id/img_play_or_pause"
-                    android:layout_width="36dp"
-                    android:layout_height="36dp"
-                    android:layout_marginEnd="12dp"
-                    android:background="?attr/selectableItemBackgroundBorderless"
-                    android:padding="6dp"
-                    android:src="@drawable/ic_pause"
-                    app:tint="#FFFFFF" />
+        <!-- Nhóm nút điều khiển -->
+        <LinearLayout
+            android:id="@+id/control_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="10dp">
 
-                <ImageView
-                    android:id="@+id/img_next"
-                    android:layout_width="36dp"
-                    android:layout_height="36dp"
-                    android:layout_marginEnd="12dp"
-                    android:background="?attr/selectableItemBackgroundBorderless"
-                    android:padding="6dp"
-                    android:src="@drawable/ic_skip_next"
-                    app:tint="#FFFFFF" />
+            <ImageView
+                android:id="@+id/img_play_or_pause"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/ic_pause"
+                android:layout_marginEnd="10dp" />
 
-                <ImageView
-                    android:id="@+id/img_clear"
-                    android:layout_width="36dp"
-                    android:layout_height="36dp"
-                    android:background="?attr/selectableItemBackgroundBorderless"
-                    android:padding="6dp"
-                    android:src="@drawable/ic_clear"
-                    app:tint="#FFFFFF" />
-            </LinearLayout>
-        </RelativeLayout>
-    </androidx.cardview.widget.CardView>
+            <ImageView
+                android:id="@+id/img_next"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/ic_skip_next"
+                android:layout_marginEnd="10dp" />
 
-    <!-- Floating Action Button for adding songs -->
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fab_add"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@id/layout_music_bar"
-        android:layout_alignParentEnd="true"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="16dp"
-        android:contentDescription="TODO"
-        android:src="@drawable/ic_add"
-        app:backgroundTint="#1DB954"
-        app:tint="#FFFFFF" />
+            <ImageView
+                android:id="@+id/img_clear"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/ic_clear" />
+        </LinearLayout>
+
+    </RelativeLayout>
 
 </RelativeLayout>

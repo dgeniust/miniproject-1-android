@@ -13,12 +13,8 @@ public class SongRepository {
 
     private SongRepository() {
         songList = new ArrayList<>();
-        songList.add(new Song("CHÚNG TA CÒN Ở ĐÓ KHÔNG?", "Orange", R.drawable.song1, R.raw.chungtaconodokhong_orange));
-        songList.add(new Song("DÙ CHO TẬN THẾ", "Erik", R.drawable.song2, R.raw.duchotanthe_erik));
-        songList.add(new Song("NOKIA", "VCC Left Hand", R.drawable.song3, R.raw.nokia_lefthand));
-        songList.add(new Song("Some one you loved", "Lewis Capaldi", R.drawable.song4, R.raw.someoneyouloved_lewiscapaldi));
-        songList.add(new Song("Window Shopper", "Hurrykng", R.drawable.song5, R.raw.windowshopper_hurrykng));
-        songList.add(new Song("MA NƠ CANH", "Hurrykng", R.drawable.song6, R.raw.manocanh_hurrykng));
+        songList.add(new Song("Trở về?", "Wrxdie ft Justatee", R.drawable.song1, R.raw.trove));
+        songList.add(new Song("I want it that way", "Backstreet Boys", R.drawable.song2, R.raw.iwantitthatway));
     }
 
     public static synchronized SongRepository getInstance() {
